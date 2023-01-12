@@ -3,7 +3,7 @@
 
 Name:		roc-toolkit-0.1
 Version:	0.1.6
-Release:	%{?snapshot:0.%{snapshot}.}1
+Release:	%{?snapshot:0.%{snapshot}.}2
 Summary:	Old version of the real-time audio streaming toolkit
 License:	MPL-2.0 AND LGPL-2.1-or-later AND CECILL-C
 URL:		https://github.com/roc-streaming/roc-toolkit
@@ -65,20 +65,21 @@ scons \
 scons install --with-openfec-includes=%{_includedir}/openfec --prefix=%{buildroot}%{_prefix} \
   --libdir=%{buildroot}%{_libdir} --disable-tests
 
+# No -devel for compat packages...
+rm -rf %{buildroot}%{_includedir} %{buildroot}%{_libdir}/*.so %{buildroot}%{_bindir} %{buildroot}%{_mandir}
+
 %files
-%license LICENSE
-%doc README.md CONTRIBUTING.md
 %{_libdir}/libroc.so.0*
  
-%files devel
-%{_includedir}/roc
-%{_libdir}/libroc.so
+#files devel
+#{_includedir}/roc
+#{_libdir}/libroc.so
  
-%files utils
-%{_bindir}/roc-conv
-%{_bindir}/roc-recv
-%{_bindir}/roc-send
-%{_mandir}/man1/*.1*
+#files utils
+#{_bindir}/roc-conv
+#{_bindir}/roc-recv
+#{_bindir}/roc-send
+#{_mandir}/man1/*.1*
  
-%files doc
-%doc html
+#files doc
+#doc html
